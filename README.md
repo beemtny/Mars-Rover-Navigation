@@ -17,7 +17,7 @@ The solution implemented in this project is written in the Go programming langua
 
 1. Run the program: `./mars_rover_navigation`
 2. Enter the grid size (e.g., 5) followed by pressing Enter.
-3. Enter the initial rover position and direction (e.g., [(1,2),(3,3)]) followed by pressing Enter.
+3. Enter the initial obstacles position (e.g., [(1,2),(3,3)]) followed by pressing Enter.
 4. Enter the sequence of commands for the rover (e.g., LMLMLMLMM) followed by pressing Enter.
 5. The program will output the final rover position, direction and status.
 
@@ -27,3 +27,6 @@ The solution implemented in this project is written in the Go programming langua
 2. The test results will be displayed in the terminal.
 
 ## Additional Notes
+
+1. The rover's movement commands (e.g., L, R, M) are case-sensitive. Ensure that the commands are entered in uppercase.
+2. The input for the obstacles' positions should be provided without any whitespace. For example, instead of [(1, 2), (3, 3)], use [(1,2),(3,3)]. This ensures that the program can correctly parse and validate the obstacle positions.
