@@ -29,6 +29,12 @@ func main() {
 		return
 	}
 
+	obs, err := parseObstacles(obstacles)
+	if err != nil {
+		fmt.Printf("[Error] Error invalid obstacles format: %s\n", err.Error())
+		return
+	}
+
 	fmt.Print("Enter your commands (e.g., LMLMLMLMM): ")
 	_, err = fmt.Scan(&commands)
 	if err != nil {
@@ -41,7 +47,7 @@ func main() {
 		return
 	}
 
-	rover, status := app.NavigateRover(gridSize, parseObstacles(obstacles), commands)
+	rover, status := app.NavigateRover(gridSize, obs, commands)
 	resultByte, err := json.Marshal(models.Result{
 		FinalPosition:  rover.CurrentPosition.ToFinalPosition(),
 		FinalDirection: models.Directions[rover.DirectionsIndex],
@@ -55,7 +61,7 @@ func main() {
 	fmt.Println(string(resultByte))
 }
 
-func parseObstacles(obstacles string) []models.Position {
+func parseObstacles(obstacles string) ([]models.Position, error) {
 	var coords []models.Position
 
 	obstacles = strings.Trim(obstacles, "[]")
@@ -65,12 +71,13 @@ func parseObstacles(obstacles string) []models.Position {
 		pair = strings.Trim(pair, "()")
 		var x, y int
 		_, err := fmt.Sscanf(pair, "%d,%d", &x, &y)
-		if err == nil {
-			coords = append(coords, models.Position{X: x, Y: y})
+		if err != nil {
+			return nil, err
 		}
+		coords = append(coords, models.Position{X: x, Y: y})
 	}
 
-	return coords
+	return coords, nil
 }
 
 func validateCommnads(commands string) bool {
