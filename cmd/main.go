@@ -18,21 +18,21 @@ func main() {
 	fmt.Print("Enter your grid_size (e.g., 5): ")
 	_, err := fmt.Scan(&gridSize)
 	if err != nil {
-		fmt.Println("[Error] Error reading grid_size input:", err)
+		fmt.Printf("[Error] Error reading grid_size input: %s\n", err.Error())
 		return
 	}
 
 	fmt.Print("Enter your obstacles with no whitespace (e.g., [(1,2),(3,3)]): ")
 	_, err = fmt.Scan(&obstacles)
 	if err != nil {
-		fmt.Println("[Error] Error reading obstacles input:", err)
+		fmt.Printf("[Error] Error reading obstacles input: %s\n", err.Error())
 		return
 	}
 
 	fmt.Print("Enter your commands (e.g., LMLMLMLMM): ")
 	_, err = fmt.Scan(&commands)
 	if err != nil {
-		fmt.Println("[Error] Error reading obstacles input:", err)
+		fmt.Printf("[Error] Error reading obstacles input: %s\n", err.Error())
 		return
 	}
 
