@@ -69,6 +69,9 @@ func parseObstacles(obstacles string) ([]models.Position, error) {
 	var coords []models.Position
 
 	obstacles = strings.Trim(obstacles, "[]")
+	if obstacles == "" {
+		return []models.Position{}, nil
+	}
 	pairs := strings.Split(obstacles, "),(")
 
 	for _, pair := range pairs {
