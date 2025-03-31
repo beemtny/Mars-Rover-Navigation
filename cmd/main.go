@@ -36,7 +36,12 @@ func main() {
 		return
 	}
 
-	rover, status := app.NavigateRover(gridSize, parseObstacles(obstacles), strings.ToUpper(commands))
+	if isValid := validateCommnads(commands); !isValid {
+		fmt.Printf("[Error] invalid input commands: %s", commands)
+		return
+	}
+
+	rover, status := app.NavigateRover(gridSize, parseObstacles(obstacles), commands)
 	resultByte, err := json.Marshal(models.Result{
 		FinalPosition:  rover.CurrentPosition.ToFinalPosition(),
 		FinalDirection: models.Directions[rover.DirectionsIndex],
@@ -66,4 +71,14 @@ func parseObstacles(obstacles string) []models.Position {
 	}
 
 	return coords
+}
+
+func validateCommnads(commands string) bool {
+	validChars := "LMR"
+	for _, cmd := range commands {
+		if !strings.ContainsRune(validChars, cmd) {
+			return false
+		}
+	}
+	return true
 }
