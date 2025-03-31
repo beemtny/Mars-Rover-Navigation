@@ -43,11 +43,15 @@ func main() {
 	}
 
 	if isValid := validateCommnads(commands); !isValid {
-		fmt.Printf("[Error] invalid input commands: %s", commands)
+		fmt.Printf("[Error] invalid input commands: %s\n", commands)
 		return
 	}
 
-	rover, status := app.NavigateRover(gridSize, obs, commands)
+	rover, status, err := app.NavigateRover(gridSize, obs, commands)
+	if err != nil {
+		fmt.Printf("[Error] %s\n", err.Error())
+		return
+	}
 	resultByte, err := json.Marshal(models.Result{
 		FinalPosition:  rover.CurrentPosition.ToFinalPosition(),
 		FinalDirection: models.Directions[rover.DirectionsIndex],

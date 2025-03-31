@@ -6,7 +6,7 @@ import (
 	"mars-rover-navigation/pkg"
 )
 
-func NavigateRover(gridSize int, obs []models.Position, commands string) (models.Rover, models.Status) {
+func NavigateRover(gridSize int, obs []models.Position, commands string) (models.Rover, models.Status, error) {
 	var (
 		rover     = models.NewRover()
 		grid      = models.NewGrid(gridSize)
@@ -25,22 +25,23 @@ func NavigateRover(gridSize int, obs []models.Position, commands string) (models
 
 			// chank boundaries
 			if isOOB := grid.IsOutOfBounderies(newPos); isOOB {
-				return rover, models.OOB
+				return rover, models.OOB, nil
 			}
 
 			// check obstacles
 			if isCash := obstacles.IsCashObstacles(newPos); isCash {
-				return rover, models.ObstacleEncountered
+				return rover, models.ObstacleEncountered, nil
 			}
 
 			rover.CurrentPosition = newPos
 		default:
 			pkg.LogDebug(fmt.Sprintf("invalid command: %s", cmd))
+			return models.Rover{}, "", fmt.Errorf("invalid command: %s", cmd)
 		}
 
 		pkg.LogDebug(fmt.Sprintf("New direction: %s, current position: %v", models.Directions[rover.DirectionsIndex], rover.CurrentPosition))
 		pkg.LogDebug("--------------------------------")
 	}
 
-	return rover, models.Success
+	return rover, models.Success, nil
 }
