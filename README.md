@@ -30,3 +30,5 @@ The solution implemented in this project is written in the Go programming langua
 
 1. The rover's movement commands (e.g., L, R, M) are case-sensitive. Ensure that the commands are entered in uppercase.
 2. The input for the obstacles' positions should be provided without any whitespace. For example, instead of [(1, 2), (3, 3)], use [(1,2),(3,3)]. This ensures that the program can correctly parse and validate the obstacle positions.
+3. If an obstacle is detected ahead, the rover must stop before moving and ignore the remaining commands.
+4. If a rover gonna move out of boundaries, the rover must stop before moving and ignore the remaining commands.
