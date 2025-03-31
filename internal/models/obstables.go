@@ -12,9 +12,9 @@ func NewObstacles(obstacles []Position) Obstacles {
 	return Obstacles{Obstacles: obstacles}
 }
 
-func (o Obstacles) IsCashObstacles(currPos Position) bool {
+func (o Obstacles) IsCashObstacles(newPos Position) bool {
 	for _, p := range o.Obstacles {
-		if (currPos.X == p.X) && (currPos.Y == p.Y) {
+		if (newPos.X == p.X) && (newPos.Y == p.Y) {
 			pkg.LogDebug("obstacle encountered!!")
 			return true
 		}

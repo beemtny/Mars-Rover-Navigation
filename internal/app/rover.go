@@ -29,7 +29,7 @@ func NavigateRover(gridSize int, obs []models.Position, commands string) (models
 			}
 
 			// check obstacles
-			if isCash := obstacles.IsCashObstacles(rover.CurrentPosition); isCash {
+			if isCash := obstacles.IsCashObstacles(newPos); isCash {
 				return rover, models.ObstacleEncountered
 			}
 
