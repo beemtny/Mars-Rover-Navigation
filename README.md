@@ -21,6 +21,97 @@ The solution implemented in this project is written in the Go programming langua
 4. Enter the sequence of commands for the rover (e.g., LMLMLMLMM) followed by pressing Enter.
 5. The program will output the final rover position, direction and status.
 
+Example1:
+
+input
+```
+grid_size = 5
+obstacles = [(1,2),(3,3)]
+commands = LMLMLMLMM
+```
+
+output (rover stops before moving out of bounds)
+```
+{
+"final_position": [0,0],
+"final_direction": "W",
+"status": "Out of bounds"
+}
+```
+
+Example2:
+
+input
+```
+grid_size = 5
+obstacles = [(1,2),(3,3)]
+commands = LMLMLMLMMMM
+```
+
+output (rover stops before moving out of bounds)
+```
+{
+"final_position": "[0,0]",
+"final_direction": "W",
+"status": "Out of bounds"
+}
+```
+
+Example3:
+
+input
+```
+grid_size = 5
+obstacles = []
+commands = MMMMMMMM
+```
+
+output (rover stops before moving out of bounds)
+```
+{
+"final_position": "[0,4]",
+"final_direction": "N",
+"status": "Out of bounds"
+}
+```
+
+Example4:
+
+input
+```
+grid_size = 5
+obstacles = []
+commands = MRMR
+```
+
+output (success case)
+```
+{
+"final_position": "[1,1]",
+"final_direction": "S",
+"status": "Success"
+}
+```
+
+Example5:
+
+input
+```
+grid_size = 5
+obstacles = [(1,1)]
+commands = MRMR
+```
+
+output (rover stops before cash obstacle)
+```
+{
+"final_position": "[0,1]",
+"final_direction": "E",
+"status": "Obstacle encountered"
+}
+```
+
+
 ## Testing Instructions
 
 1. Run the unit tests: `go test ./internal/... -v`
